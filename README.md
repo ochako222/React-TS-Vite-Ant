@@ -1,40 +1,54 @@
-# AnySkin React TypeScript Project
+# React + TypeScript + Vite
 
-A React application built with **TypeScript**, **SASS**, and **React-Bootstrap** for a modern, responsive UI.
+This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
 
-## Features
+Currently, two official plugins are available:
 
-- ✅ **TypeScript** – static typing for improved code reliability and developer experience
-- 🎨 **SASS** – clean, modular, and maintainable styling
-- ⚛️ **React-Bootstrap** – reusable and responsive UI components
+- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
+- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
 
-## Installation
+## Expanding the ESLint configuration
 
-1. **Clone the repository**:
+If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
 
-    ```bash
-    git clone <repository_url>
-    cd <project_name>
-    ```
-
-2. **Install dependencies**:
-
-```bash
-npm install
+```js
+export default tseslint.config({
+  extends: [
+    // Remove ...tseslint.configs.recommended and replace with this
+    ...tseslint.configs.recommendedTypeChecked,
+    // Alternatively, use this for stricter rules
+    ...tseslint.configs.strictTypeChecked,
+    // Optionally, add this for stylistic rules
+    ...tseslint.configs.stylisticTypeChecked,
+  ],
+  languageOptions: {
+    // other options...
+    parserOptions: {
+      project: ['./tsconfig.node.json', './tsconfig.app.json'],
+      tsconfigRootDir: import.meta.dirname,
+    },
+  },
+})
 ```
 
-3. **Start the development server**:
+You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
 
-```bash
-npm start
+```js
+// eslint.config.js
+import reactX from 'eslint-plugin-react-x'
+import reactDom from 'eslint-plugin-react-dom'
+
+export default tseslint.config({
+  plugins: {
+    // Add the react-x and react-dom plugins
+    'react-x': reactX,
+    'react-dom': reactDom,
+  },
+  rules: {
+    // other rules...
+    // Enable its recommended typescript rules
+    ...reactX.configs['recommended-typescript'].rules,
+    ...reactDom.configs.recommended.rules,
+  },
+})
 ```
-
-## Production Launch on Vendor Machine
-
-To run this app in a production-like kiosk mode on the vendor machine, use:
-
-```bash
-./launchScript.sh
-```
-
-This script launches the app in full-screen mode with no browser UI, designed for standalone usage.
