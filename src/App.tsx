@@ -1,11 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
 import { DatePicker } from 'antd'
+import { useState } from 'react'
+import { useDispatch, useSelector } from 'react-redux'
+import './App.css'
+import reactLogo from './assets/react.svg'
+import type { RootState } from './store'
+import viteLogo from '/vite.svg'
+import { removeTopping } from './store/pizzaSlice'
 
 function App() {
   const [count, setCount] = useState(0)
+
+const pizza = useSelector((state: RootState) => state.pizza);
+const dispatch = useDispatch();
+
+
+
+  const renderToppings = () =>
+    pizza.toppings.map(topping => (
+      <div key={topping}>
+        {topping}
+        <button onClick={() => dispatch(removeTopping(topping))}>Remove</button>
+      </div>
+    ));
+
+
+
 
   return (
     <>
@@ -29,7 +48,14 @@ function App() {
       <p className="read-the-docs">
         Click on the Vite and React logos to learn more
       </p>
+
+            
+      {renderToppings()}
+
+      
       <DatePicker />
+
+
     </>
   )
 }
