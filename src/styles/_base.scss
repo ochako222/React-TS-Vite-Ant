@@ -1,0 +1,11 @@
+.content-layout {
+    padding: 0 24px 24px;
+
+    .content-container {
+        padding: 24px;
+        margin: 0px;
+        min-height: 280px;
+        background: $primary-background;
+        border-radius: 8px;
+    }
+}
