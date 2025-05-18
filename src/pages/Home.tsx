@@ -4,7 +4,7 @@ import { MainLayout } from '../layouts/MainLayout';
 import { useSelector, useDispatch } from 'react-redux';
 import { RootState } from 'src/store';
 import { removeBottle, removeBuster } from 'src/store/machineSlice';
-import { Divider } from 'antd';
+import { Button, Divider } from 'antd';
 
 const _HomePage = () => {
     const { bottles, busters } = useSelector((state: RootState) => state.machine);
@@ -12,17 +12,17 @@ const _HomePage = () => {
 
     const renderBottles = () =>
         bottles.map((bottle) => (
-            <div key={bottle}>
+            <div style={{ display: 'flex' }} key={bottle}>
                 {bottle}
-                <button onClick={() => dispatch(removeBottle(bottle))}>Remove</button>
+                <Button onClick={() => dispatch(removeBottle(bottle))}>Remove</Button>
             </div>
         ));
 
     const renderBusters = () =>
         busters.map((buster) => (
-            <div key={buster}>
+            <div style={{ display: 'flex' }} key={buster}>
                 {buster}
-                <button onClick={() => dispatch(removeBuster(buster))}>Remove</button>
+                <Button onClick={() => dispatch(removeBuster(buster))}>Remove</Button>
             </div>
         ));
 

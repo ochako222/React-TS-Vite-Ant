@@ -1,4 +1,4 @@
-import { Layout, theme } from 'antd';
+import { Layout } from 'antd';
 import { Content, Header } from 'antd/es/layout/layout';
 import Sider from 'antd/es/layout/Sider';
 import { type ReactNode } from 'react';
